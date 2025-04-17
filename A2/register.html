@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+    }
+  </script>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 flex items-center justify-center min-h-screen transition duration-300">
+
+  <!-- Dark Mode Toggle -->
+  <button onclick="document.documentElement.classList.toggle('dark')" class="absolute top-4 right-4 text-sm px-3 py-1 rounded bg-gray-300 hover:bg-gray-400 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600 transition">
+    Toggle Theme
+  </button>
+
+  <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg w-full max-w-md mx-4 sm:mx-auto">
+    <h2 class="text-3xl font-bold text-center text-gray-700 dark:text-white mb-6">Create Account</h2>
+
+    <form class="space-y-6" onsubmit="event.preventDefault(); alert('Account created successfully!')">
+      <!-- Full Name -->
+      <div class="relative">
+        <input type="text" id="name" required placeholder="Full Name"
+          class="peer w-full px-4 pt-6 pb-2 border border-gray-300 dark:border-gray-700 rounded-lg placeholder-transparent focus:outline-none focus:ring-2 focus:ring-green-400 bg-white dark:bg-gray-900 dark:text-white" />
+        <label for="name"
+          class="absolute left-4 top-2 text-sm text-gray-500 peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 transition-all dark:text-gray-400">Full
+          Name</label>
+      </div>
+
+      <!-- Email -->
+      <div class="relative">
+        <input type="email" id="email" required placeholder="Email"
+          class="peer w-full px-4 pt-6 pb-2 border border-gray-300 dark:border-gray-700 rounded-lg placeholder-transparent focus:outline-none focus:ring-2 focus:ring-green-400 bg-white dark:bg-gray-900 dark:text-white" />
+        <label for="email"
+          class="absolute left-4 top-2 text-sm text-gray-500 peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 transition-all dark:text-gray-400">Email</label>
+      </div>
+
+      <!-- Password -->
+      <div class="relative">
+        <input type="password" id="password" required placeholder="Password"
+          class="peer w-full px-4 pt-6 pb-2 border border-gray-300 dark:border-gray-700 rounded-lg placeholder-transparent focus:outline-none focus:ring-2 focus:ring-green-400 bg-white dark:bg-gray-900 dark:text-white" />
+        <label for="password"
+          class="absolute left-4 top-2 text-sm text-gray-500 peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 transition-all dark:text-gray-400">Password</label>
+        <button type="button" onclick="toggleVisibility('password', this)"
+          class="absolute right-4 top-1/2 -translate-y-1/2 text-green-500 text-sm hover:underline">Show</button>
+      </div>
+
+      <!-- Confirm Password -->
+      <div class="relative">
+        <input type="password" id="confirm" required placeholder="Confirm Password"
+          class="peer w-full px-4 pt-6 pb-2 border border-gray-300 dark:border-gray-700 rounded-lg placeholder-transparent focus:outline-none focus:ring-2 focus:ring-green-400 bg-white dark:bg-gray-900 dark:text-white" />
+        <label for="confirm"
+          class="absolute left-4 top-2 text-sm text-gray-500 peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 transition-all dark:text-gray-400">Confirm
+          Password</label>
+        <button type="button" onclick="toggleVisibility('confirm', this)"
+          class="absolute right-4 top-1/2 -translate-y-1/2 text-green-500 text-sm hover:underline">Show</button>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit"
+        class="w-full bg-green-600 text-white font-semibold py-2 rounded-lg hover:bg-green-700 transition duration-300 focus:ring-4 focus:ring-green-300">
+        Register
+      </button>
+    </form>
+
+    <!-- Login Redirect -->
+    <p class="text-sm text-center text-gray-600 dark:text-gray-300 mt-4">
+      Already have an account?
+      <a href="index.html" class="text-blue-500 hover:underline">Login</a>
+    </p>
+  </div>
+
+  <!-- JS: Toggle Password Visibility -->
+  <script>
+    function toggleVisibility(id, btn) {
+      const input = document.getElementById(id);
+      if (input.type === "password") {
+        input.type = "text";
+        btn.textContent = "Hide";
+      } else {
+        input.type = "password";
+        btn.textContent = "Show";
+      }
+    }
+  </script>
+</body>
+</html>
