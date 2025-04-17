@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class'
+    }
+  </script>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 flex items-center justify-center min-h-screen transition-colors duration-500">
+
+  <!-- 🌙 Dark Mode Toggle -->
+  <button onclick="document.documentElement.classList.toggle('dark')" class="absolute top-4 right-4 text-sm px-3 py-1 rounded bg-gray-300 hover:bg-gray-400 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600 transition">
+    Toggle Theme
+  </button>
+
+  <!-- 🖥️ Login Form Card -->
+  <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-xl w-full max-w-md mx-4 sm:mx-auto">
+    <h2 class="text-3xl font-bold text-center text-gray-700 dark:text-gray-200 mb-8">Login</h2>
+    <form class="space-y-6" id="login-form" onsubmit="event.preventDefault(); loginUser()">
+      <!-- 🌐 Email Field -->
+      <div class="relative">
+        <input type="email" id="email" required
+          class="peer w-full px-4 pt-6 pb-2 border border-gray-300 dark:border-gray-700 rounded-lg placeholder-transparent focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white dark:bg-gray-900 dark:text-white"
+          placeholder="Email" />
+        <label for="email"
+          class="absolute left-4 top-2 text-sm text-gray-500 peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 transition-all dark:text-gray-400">
+          Email Address
+        </label>
+      </div>
+
+      <!-- 🔒 Password Field -->
+      <div class="relative">
+        <input type="password" id="password" required
+          class="peer w-full px-4 pt-6 pb-2 border border-gray-300 dark:border-gray-700 rounded-lg placeholder-transparent focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white dark:bg-gray-900 dark:text-white"
+          placeholder="Password" />
+        <label for="password"
+          class="absolute left-4 top-2 text-sm text-gray-500 peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 transition-all dark:text-gray-400">
+          Password
+        </label>
+        <!-- 👁️ Toggle password visibility -->
+        <button type="button" onclick="togglePassword()" class="absolute right-4 top-1/2 -translate-y-1/2 text-blue-500 text-sm hover:underline">Show</button>
+      </div>
+
+      <!-- ⚙️ Links for Forgot Password or Register -->
+      <div class="flex flex-col sm:flex-row justify-between items-center text-sm text-gray-600 dark:text-gray-400 gap-2">
+        <a href="forgot-password.html" class="hover:underline">Forgot Password?</a>
+        <a href="register.html" class="hover:underline">Create an account</a>
+      </div>
+
+      <!-- 🚀 Submit Button -->
+      <button type="submit"
+        class="w-full bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 text-white font-semibold py-2 rounded-lg transition duration-300">
+        Login
+      </button>
+    </form>
+
+    <!-- 🕒 Loading Spinner -->
+    <div id="loading-spinner" class="hidden justify-center items-center mt-4">
+      <svg class="animate-spin h-8 w-8 text-blue-500 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 1 1 16 0 8 8 0 0 1-16 0z"></path>
+      </svg>
+    </div>
+
+  </div>
+
+  <!-- JS: Password Visibility -->
+  <script>
+    function togglePassword() {
+      const pwd = document.getElementById("password");
+      const btn = event.target;
+      if (pwd.type === "password") {
+        pwd.type = "text";
+        btn.textContent = "Hide";
+      } else {
+        pwd.type = "password";
+        btn.textContent = "Show";
+      }
+    }
+  </script>
+
+  <!-- JS: Login Function with Validation & Animation -->
+  <script>
+    function loginUser() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      // Basic Validation
+      if (email === "" || password === "") {
+        alert("Please fill in all fields.");
+        return;
+      }
+
+      // Show Loading Spinner
+      document.getElementById("loading-spinner").classList.remove("hidden");
+
+      // Simulate Login Process
+      setTimeout(() => {
+        // Fake successful login
+        alert(`Logged in successfully as ${email}!`);
+        // Hide Loading Spinner
+        document.getElementById("loading-spinner").classList.add("hidden");
+        // Redirect to Dashboard (change URL as needed)
+        window.location.href = "dashboard.html";
+      }, 2000); // Simulating network delay
+    }
+  </script>
+
+  <!-- JS: Form Input Validation Feedback -->
+  <script>
+    document.getElementById("email").addEventListener("input", function () {
+      const email = this.value;
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+      if (!emailRegex.test(email)) {
+        this.classList.add("border-red-500");
+        this.classList.remove("border-gray-300");
+      } else {
+        this.classList.remove("border-red-500");
+        this.classList.add("border-gray-300");
+      }
+    });
+
+    document.getElementById("password").addEventListener("input", function () {
+      const password = this.value;
+      if (password.length < 8) {
+        this.classList.add("border-red-500");
+        this.classList.remove("border-gray-300");
+      } else {
+        this.classList.remove("border-red-500");
+        this.classList.add("border-gray-300");
+      }
+    });
+  </script>
+
+</body>
+</html>

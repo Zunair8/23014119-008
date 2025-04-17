@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+    }
+  </script>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 flex items-center justify-center min-h-screen transition-colors duration-500">
+
+  <!-- 🌙 Dark Mode Toggle -->
+  <button onclick="document.documentElement.classList.toggle('dark')"
+    class="absolute top-4 right-4 text-sm px-3 py-1 rounded bg-gray-300 hover:bg-gray-400 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600 transition">
+    Toggle Theme
+  </button>
+
+  <!-- 🔐 Login Card -->
+  <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-xl w-full max-w-md mx-4 sm:mx-auto">
+    <h2 class="text-3xl font-bold text-center text-gray-700 dark:text-gray-200 mb-8">Welcome Back</h2>
+
+    <form id="login-form" class="space-y-6" onsubmit="event.preventDefault(); handleLogin()">
+
+      <!-- 📧 Email -->
+      <div class="relative">
+        <input type="email" id="email" required placeholder="Email"
+          class="peer w-full px-4 pt-6 pb-2 border border-gray-300 dark:border-gray-700 rounded-lg placeholder-transparent focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white dark:bg-gray-900 dark:text-white" />
+        <label for="email"
+          class="absolute left-4 top-2 text-sm text-gray-500 peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 transition-all dark:text-gray-400">
+          Email Address
+        </label>
+        <p id="email-error" class="text-xs text-red-500 hidden">Please enter a valid email.</p>
+      </div>
+
+      <!-- 🔒 Password -->
+      <div class="relative">
+        <input type="password" id="password" required placeholder="Password"
+          class="peer w-full px-4 pt-6 pb-2 border border-gray-300 dark:border-gray-700 rounded-lg placeholder-transparent focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white dark:bg-gray-900 dark:text-white" />
+        <label for="password"
+          class="absolute left-4 top-2 text-sm text-gray-500 peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 transition-all dark:text-gray-400">
+          Password
+        </label>
+        <!-- 👁 Password Toggle -->
+        <button type="button" onclick="togglePassword(this)"
+          class="absolute right-4 top-1/2 -translate-y-1/2 text-blue-500 text-sm hover:underline">Show</button>
+      </div>
+
+      <!-- 🔗 Links -->
+      <div class="flex flex-col sm:flex-row justify-between items-center text-sm text-gray-600 dark:text-gray-400 gap-2">
+        <a href="forgot-password.html" class="hover:underline">Forgot Password?</a>
+        <a href="register.html" class="hover:underline">Create an account</a>
+      </div>
+
+      <!-- 🚀 Login Button -->
+      <button type="submit"
+        class="w-full bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 text-white font-semibold py-2 rounded-lg transition duration-300">
+        Login
+      </button>
+
+      <!-- 🏆 Success/Error Message -->
+      <div id="login-message" class="text-center mt-4 text-sm font-semibold hidden"></div>
+
+    </form>
+  </div>
+
+  <!-- ✅ JavaScript: Toggle Password Visibility -->
+  <script>
+    // Toggle Password Visibility
+    function togglePassword(btn) {
+      const pwd = document.getElementById("password");
+      if (pwd.type === "password") {
+        pwd.type = "text";
+        btn.textContent = "Hide";
+      } else {
+        pwd.type = "password";
+        btn.textContent = "Show";
+      }
+    }
+
+    // Handle Login
+    function handleLogin() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      const emailError = document.getElementById("email-error");
+      const messageDiv = document.getElementById("login-message");
+
+      // Show loading spinner
+      document.getElementById("login-message").textContent = "Logging in...";
+      messageDiv.classList.remove("hidden");
+
+      // Simulate login process (Delay to show message)
+      setTimeout(() => {
+        if (!validateEmail(email)) {
+          emailError.classList.remove("hidden");
+          messageDiv.textContent = "";
+        } else if (password.length < 6) {
+          messageDiv.textContent = "Password must be at least 6 characters.";
+          messageDiv.classList.remove("text-green-500");
+          messageDiv.classList.add("text-red-500");
+        } else {
+          // Success message
+          messageDiv.textContent = "Logged in successfully!";
+          messageDiv.classList.remove("text-red-500");
+          messageDiv.classList.add("text-green-500");
+        }
+      }, 2000); // Simulate network delay
+    }
+
+    // Real-time Email Validation
+    document.getElementById("email").addEventListener("input", function () {
+      const email = this.value;
+      const emailError = document.getElementById("email-error");
+      if (!validateEmail(email)) {
+        emailError.classList.remove("hidden");
+      } else {
+        emailError.classList.add("hidden");
+      }
+    });
+
+    // Email Validation Function
+    function validateEmail(email) {
+      const re = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+      return re.test(String(email).toLowerCase());
+    }
+
+    // Clear Error Messages on Focus
+    document.getElementById("email").addEventListener("focus", function () {
+      document.getElementById("email-error").classList.add("hidden");
+    });
+
+    document.getElementById("password").addEventListener("focus", function () {
+      document.getElementById("password-error").classList.add("hidden");
+    });
+  </script>
+
+</body>
+</html>
