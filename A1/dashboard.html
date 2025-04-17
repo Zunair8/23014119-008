@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="dashboard.js"></script>
+</head>
+<body>
+  <header>
+    <nav>
+      <h1>MyLoginApp</h1>
+      <ul>
+        <li><a href="index.html">Logout</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="dashboard-welcome">
+      <h2>👋 Welcome back, User!</h2>
+      <p>Here's a quick overview of your account and activity.</p>
+    </section>
+
+    <section class="dashboard-cards">
+      <div class="card stat-card">
+        <h3>🔐 Logins</h3>
+        <p id="loginCount">12</p>
+      </div>
+      <div class="card stat-card">
+        <h3>📩 Messages</h3>
+        <p>5 new</p>
+      </div>
+      <div class="card stat-card">
+        <h3>⚙️ Settings</h3>
+        <p>Updated 2 days ago</p>
+      </div>
+    </section>
+
+    <section class="quick-actions">
+      <h3>🚀 Quick Actions</h3>
+      <button onclick="alert('Edit Profile Clicked')">Edit Profile</button>
+      <button onclick="alert('Check Notifications Clicked')">Check Notifications</button>
+      <button onclick="alert('Change Password Clicked')">Change Password</button>
+    </section>
+
+    <section class="profile-section">
+      <h3>🧑 Your Profile</h3>
+      <ul>
+        <li><strong>Name:</strong> John Doe</li>
+        <li><strong>Email:</strong> john@example.com</li>
+        <li><strong>Member Since:</strong> January 2024</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 MyLoginApp. All rights reserved.</p>
+  </footer>
+</body>
+</html>
